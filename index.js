@@ -43,15 +43,35 @@ function initialPrompt() {
 function viewAllDepartments() {
     // const department = `${all.allDepartments()}`;
     const dept = viewAll.allDepartments();
-    console.table(dept);
-    initialPrompt();
-};
+   
+        dept.then((res) => {
+            console.log(`
+
+            ===============
+            All Departments
+            ===============
+            `);
+            console.table(res[0]);
+            initialPrompt();
+        })
+    };
+   
 
 function viewAllRoles() {
     // const department = `${all.allDepartments()}`;
+    
     const role = viewAll.allRoles();
-    console.table(role);
-    initialPrompt();
+    role.then((res) => {
+        console.log(`
+
+        =========
+        All Roles
+        =========
+        `);
+        console.table(res[0]);
+        initialPrompt();
+    })
+    
 };
 
 
