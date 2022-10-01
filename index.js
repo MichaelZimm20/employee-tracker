@@ -40,9 +40,9 @@ function initialPrompt() {
 }
 
 
+// function to display all the departments
 function viewAllDepartments() {
-    // const department = `${all.allDepartments()}`;
-    const dept = viewAll.allDepartments();
+     const dept = viewAll.allDepartments();
    
         dept.then((res) => {
             console.log(`
@@ -56,10 +56,8 @@ function viewAllDepartments() {
         })
     };
    
-
+//function to display all the roles 
 function viewAllRoles() {
-    // const department = `${all.allDepartments()}`;
-    
     const role = viewAll.allRoles();
     role.then((res) => {
         console.log(`
