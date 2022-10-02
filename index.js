@@ -3,6 +3,7 @@ const dbConnection = require('./db/connection');
 const inquirer = require('inquirer');
 require('console.table');
 const viewAll = require('./lib/viewAll');
+const addUpdate = require('./lib/addUpdate');
 
 // Initial prompt for app
 function initialPrompt() {
@@ -36,12 +37,17 @@ function initialPrompt() {
                     // console.log('answers', answers);
                     viewAllEmployees();
                     break;
+                case 'Add a Department':
+                    // console.log('answers', answers);
+                    newDepartment();
+                    break;
                 default:
                     break;
             }
         })
 }
 
+//--------------------------- START: SHOW ALL DEPARTMENTS, ROLES, EMPLOYEES-----------------------//
 
 // function to display all the departments
 function viewAllDepartments() {
@@ -88,4 +94,31 @@ function viewAllEmployees() {
         initialPrompt();
     })
 }
+//--------------------------- END: SHOW ALL DEPARTMENTS, ROLES, EMPLOYEES-----------------------//
+
+
+//--------------------------- START: ADD DEPARTMENT, ROLE, EMPLOYEE. UPDATE EMPLOYEE ROLE -----------------------//
+
+function newDepartment() {
+    const dept = inquirer.prompt([
+        {
+            name: 'name',
+            type: 'input',
+            message: 'What is the name of the department?'
+        }
+    ])
+    
+    addUpdate.addDepartment(dept);
+    console.log(`Added ${dept.name} to the database!\n`);
+    initialPrompt();
+   
+    // const add = addUpdate.addDepartment();
+//    add.then((res) => {
+//        console.log(`Added ${dept.name} to the database!\n`);
+//    })
+}
+
+
+
+
 initialPrompt();
