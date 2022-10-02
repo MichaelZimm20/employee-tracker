@@ -32,7 +32,10 @@ function initialPrompt() {
                     // console.log('answers', answers);
                     viewAllRoles();
                     break;
-            
+                case 'View All Employees':
+                    // console.log('answers', answers);
+                    viewAllEmployees();
+                    break;
                 default:
                     break;
             }
@@ -47,9 +50,9 @@ function viewAllDepartments() {
         dept.then((res) => {
             console.log(`
 
-            ===============
-            All Departments
-            ===============
+            =======================
+                All Departments
+            =======================
             `);
             console.table(res[0]);
             initialPrompt();
@@ -62,9 +65,9 @@ function viewAllRoles() {
     role.then((res) => {
         console.log(`
 
-        =========
-        All Roles
-        =========
+        =================
+            All Roles
+        =================
         `);
         console.table(res[0]);
         initialPrompt();
@@ -72,5 +75,17 @@ function viewAllRoles() {
     
 };
 
+function viewAllEmployees() {
+    const employee = viewAll.allEmployees();
+    employee.then((res) => {
+        console.log(`
 
+        =================
+          All Employees
+        =================
+        `);
+        console.table(res[0]);
+        initialPrompt();
+    })
+}
 initialPrompt();

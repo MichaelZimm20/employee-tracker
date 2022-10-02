@@ -13,6 +13,7 @@ CREATE TABLE role (
     title VARCHAR(30) NOT NULL,
     salary DECIMAL(10,2) NOT NULL,
     department_id INTEGER NOT NULL
+    -- CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 -- creating table for employee
@@ -21,6 +22,7 @@ CREATE TABLE employee (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INTEGER NULL,
-    manager_id INTEGER NULL, 
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
+    manager_id INTEGER NULL
+    -- CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
+   
 );
