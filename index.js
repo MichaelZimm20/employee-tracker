@@ -99,8 +99,8 @@ function viewAllEmployees() {
 
 //--------------------------- START: ADD DEPARTMENT, ROLE, EMPLOYEE. UPDATE EMPLOYEE ROLE -----------------------//
 
-function newDepartment() {
-    const dept = inquirer.prompt([
+async function newDepartment() {
+    const dept = await inquirer.prompt([
         {
             name: 'name',
             type: 'input',
@@ -111,11 +111,6 @@ function newDepartment() {
     addUpdate.addDepartment(dept);
     console.log(`Added ${dept.name} to the database!\n`);
     initialPrompt();
-   
-    // const add = addUpdate.addDepartment();
-//    add.then((res) => {
-//        console.log(`Added ${dept.name} to the database!\n`);
-//    })
 }
 
 
