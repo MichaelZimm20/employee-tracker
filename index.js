@@ -41,6 +41,14 @@ function initialPrompt() {
                     // console.log('answers', answers);
                     newDepartment();
                     break;
+                case 'Add a Role':
+                    // console.log('answers', answers);
+                    newRole();
+                    break;
+                case 'Add a Employee':
+                    // console.log('answers', answers);
+                    newEmployee();
+                    break;
                 default:
                     break;
             }
@@ -99,6 +107,7 @@ function viewAllEmployees() {
 
 //--------------------------- START: ADD DEPARTMENT, ROLE, EMPLOYEE. UPDATE EMPLOYEE ROLE -----------------------//
 
+// Add new Department
 async function newDepartment() {
     const dept = await inquirer.prompt([
         {
@@ -113,7 +122,96 @@ async function newDepartment() {
     initialPrompt();
 }
 
+// Add new role
+async function newRole() {
+    const departments = await viewAll.allDepartments();
+    console.log(departments);
+    const validDepartments = departments[0].map(department => { 
+       return { name: department.name, 
+        value: department.id}});
 
+    console.log(validDepartments)
+    const role = await inquirer.prompt([
+        {
+            name: 'title',
+            type: 'input',
+            message: 'What is the name of the role?'
+        },
+        {
+            name: 'salary',
+            type: 'input',
+            message: 'What is the salary of the role?'
+        },
+        {
+            name: 'department_id',
+            type: 'list',
+            message: 'Which department does the role belong to?',
+            choices: validDepartments
+        }
+    ]);
+    console.log(role)
+    await addUpdate.addRole(role);
+    console.log(`Added ${role.title} to the database!\n`);
+    initialPrompt();
+}
+
+// Add new employee
+async function newEmployee() {
+    const roles = await viewAll.allRoles();
+    const employees = await viewAll.allEmployees();
+
+   
+    const validRoles = roles[0].map(role => { 
+       return { name: role.title, 
+        value: role.id}});
+
+
+    const validEmployees = employees[0].map(employee => {
+        return {
+            name: employee.first_name + ' ' + employee.last_name,
+            value: employee.id
+        }
+    })    
+
+
+   
+    const employee = await inquirer.prompt([
+        {
+            name: 'first_name',
+            type: 'input',
+            message: "What is the employee's first name?"
+        },
+        {
+            name: 'last_name',
+            type: 'input',
+            message: "What is the employee's last name?"
+        },
+        {
+            name: 'role_id',
+            type: 'list',
+            message: "What is the employee's role?",
+            choices: validRoles
+        },
+        {
+            name: 'manager_id',
+            type: 'list',
+            message: "Who is the employee's manager?",
+            choices: validEmployees
+        }
+        
+    ]);
+    console.log(employee)
+    await addUpdate.addEmployee(employee);
+    console.log(`Added ${employee.first_name} ${employee.last_name} to the database!\n`);
+    initialPrompt();
+}
+
+
+
+// Update employee role
+async function upRole() { 
+    
+}
 
 
 initialPrompt();
