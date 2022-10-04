@@ -49,6 +49,10 @@ function initialPrompt() {
                     // console.log('answers', answers);
                     newEmployee();
                     break;
+                case 'Update an Employee Role':
+                    // console.log('answers', answers);
+                    roleUpdated();
+                    break;
                 default:
                     break;
             }
@@ -209,8 +213,42 @@ async function newEmployee() {
 
 
 // Update employee role
-async function upRole() { 
-    
+async function roleUpdated() { 
+    const roles = await viewAll.allRoles();
+    const employees = await viewAll.allEmployees();
+
+   
+    const validRoles = roles[0].map(role => { 
+       return { name: role.title, 
+        value: role.id}});
+        console.log(validRoles);
+
+
+    const validEmployees = employees[0].map(employee => {
+        return {
+            name: employee.first_name + ' ' + employee.last_name,
+            value: employee.id
+        }
+    }) 
+
+    const employeeRole = await inquirer.prompt([
+        {
+            name: 'employee',
+            type: 'list',
+            message: "Which employee's role do you want to update?",
+            choices: validEmployees
+        },
+        {
+            name: 'title',
+            type: 'list',
+            message: "Which role do you want to assign the selected employee?",
+            choices: validRoles
+        }
+    ])
+
+        await addUpdate.updateRole(employeeRole);
+        console.log(`Updated employee's role\n`);
+        initialPrompt();
 }
 
 
