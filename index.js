@@ -2,8 +2,11 @@
 const dbConnection = require('./db/connection');
 const inquirer = require('inquirer');
 require('console.table');
+
+// import viewAll and addUpdate Class functions
 const viewAll = require('./lib/viewAll');
 const addUpdate = require('./lib/addUpdate');
+
 
 // Initial prompt for app
 function initialPrompt() {
