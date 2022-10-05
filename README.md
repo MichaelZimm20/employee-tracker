@@ -19,7 +19,7 @@
   * Inquirer Setup - "npm i inquirer@8.2.4" 
   * Console Table Setup - "npm install console.table --save" 
   * Be sure to run the above packages in your terminal and include your require statements for your necessary files.
-  * Don't forget to create your connections to the database useing " const <databaseName> = mysql.createConnection()"
+  * Don't forget to create your connections to the database using "const <databaseName> = mysql.createConnection()"
 
 ## Usage 
   Used to easily view and interact with information stored in a database. 
