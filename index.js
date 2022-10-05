@@ -26,34 +26,29 @@ function initialPrompt() {
             // Switch statement to handle if user selects from initialPrompt choices
             switch (answers.employment) {
                 case 'View All Departments':
-                    // console.log('answers', answers);
                     viewAllDepartments();
                     break;
                 case 'View All Roles':
-                    // console.log('answers', answers);
                     viewAllRoles();
                     break;
                 case 'View All Employees':
-                    // console.log('answers', answers);
                     viewAllEmployees();
                     break;
                 case 'Add a Department':
-                    // console.log('answers', answers);
                     newDepartment();
                     break;
                 case 'Add a Role':
-                    // console.log('answers', answers);
                     newRole();
                     break;
                 case 'Add a Employee':
-                    // console.log('answers', answers);
                     newEmployee();
                     break;
                 case 'Update an Employee Role':
-                    // console.log('answers', answers);
                     roleUpdated();
                     break;
                 default:
+                    // re-run prompt 
+                    initialPrompt();
                     break;
             }
         })
@@ -77,6 +72,7 @@ function viewAllDepartments() {
         })
     };
    
+
 //function to display all the roles 
 function viewAllRoles() {
     const role = viewAll.allRoles();
@@ -93,6 +89,7 @@ function viewAllRoles() {
     
 };
 
+// view all employees function. Joins tables from roles and department to show all employees information
 function viewAllEmployees() {
     const employee = viewAll.allEmployees();
     employee.then((res) => {
@@ -129,12 +126,12 @@ async function newDepartment() {
 // Add new role
 async function newRole() {
     const departments = await viewAll.allDepartments();
-    console.log(departments);
+    // console.log(departments);
     const validDepartments = departments[0].map(department => { 
        return { name: department.name, 
         value: department.id}});
 
-    console.log(validDepartments)
+    // console.log(validDepartments)
     const role = await inquirer.prompt([
         {
             name: 'title',
@@ -153,7 +150,7 @@ async function newRole() {
             choices: validDepartments
         }
     ]);
-    console.log(role)
+    // console.log(role)
     await addUpdate.addRole(role);
     console.log(`Added ${role.title} to the database!\n`);
     initialPrompt();
@@ -204,7 +201,7 @@ async function newEmployee() {
         }
         
     ]);
-    console.log(employee)
+    // console.log(employee)
     await addUpdate.addEmployee(employee);
     console.log(`Added ${employee.first_name} ${employee.last_name} to the database!\n`);
     initialPrompt();
@@ -221,7 +218,7 @@ async function roleUpdated() {
     const validRoles = roles[0].map(role => { 
        return { name: role.title, 
         value: role.id}});
-        console.log(validRoles);
+        // console.log(validRoles);
 
 
     const validEmployees = employees[0].map(employee => {

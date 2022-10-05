@@ -15,12 +15,5 @@ const db = mysql.createConnection(
     console.log('Connected to the company database.')
 );
 
-// db.promise().query('SELECT 1')
-//     .then(({rows,fields}) => {
-//         console.log(rows);
-//     })
-//     .catch(console.log)
-//     .then( () => db.end());
-
-
+// exports db connection 
 module.exports = db;
